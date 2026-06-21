@@ -582,19 +582,19 @@
             // Populate score & verdict
             lblIntegrityScore.textContent = report.integrity_score;
             
-            // Color code score circle border
+            // Color code score circle border and classify binary status
             if (report.integrity_score >= 85) {
                 scoreCircle.style.borderColor = 'var(--accent-green)';
                 lblVerdict.className = 'verdict-badge pass';
-                lblVerdict.textContent = 'High Integrity';
+                lblVerdict.textContent = 'CLEAN';
             } else if (report.integrity_score >= 60) {
                 scoreCircle.style.borderColor = 'var(--accent-orange)';
                 lblVerdict.className = 'verdict-badge review';
-                lblVerdict.textContent = 'Needs Review';
+                lblVerdict.textContent = 'FLAGGED (NEEDS REVIEW)';
             } else {
                 scoreCircle.style.borderColor = 'var(--accent-red)';
                 lblVerdict.className = 'verdict-badge fail';
-                lblVerdict.textContent = 'Suspicious Activity';
+                lblVerdict.textContent = 'FLAGGED (SUSPICIOUS)';
             }
 
             // Populate other stats
