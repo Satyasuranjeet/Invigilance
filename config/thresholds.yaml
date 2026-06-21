@@ -1,0 +1,48 @@
+eye_gaze:
+  away_angle_deg: 25
+  away_duration_sec: 2.0
+head_pose:
+  yaw_threshold_deg: 30
+  pitch_threshold_deg: 20
+shoulder:
+  lateral_shift_ratio: 0.15
+lip:
+  movement_var_threshold: 0.02
+  buffer_duration_sec: 1.5
+  min_duration_sec: 0.5
+  min_crossings: 3
+object_detection:
+  run_every_n_frames: 3
+  confidence_threshold: 0.5
+face_presence:
+  absence_duration_sec: 1.5
+
+severity:
+  default:
+    medium: 0.4
+    high: 0.7
+  eye_gaze:
+    medium: 0.5
+    high: 0.8
+  head_pose:
+    medium: 0.5
+    high: 0.8
+  shoulder_pose:
+    medium: 0.5
+    high: 0.8
+  lip_movement:
+    medium: 0.5
+    high: 0.8
+  face_presence:
+    medium: 0.5
+    high: 0.8
+  person_count:
+    medium: 0.5
+    high: 0.8
+  phone_detected:
+    medium: 0.5
+    high: 0.8
+  secondary_device_detected:
+    medium: 0.5
+    high: 0.8
+

@@ -1,0 +1,34 @@
+# IDE / editor configurations
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Virtual environment
+venv/
+.env
+
+# Python caching
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+
+# Project logs
+logs/
+
+# Test fixtures / downloaded validation images
+tests/fixtures/
+
+# Model binaries (weights)
+models/*.pt
+models/*.onnx
+
+# AI Prompt Build Kit & tracking files
+prompts/
+coding_standards.md
+Agents.md
+progress_tracker.md
+LIMITATIONS.md
