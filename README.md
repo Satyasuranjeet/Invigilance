@@ -74,6 +74,47 @@ python main.py
 * **Alert Engine Stack (Top-Right)**: Shows active notifications color-coded by severity level (Yellow: Low, Orange: Medium, Red: High) after debouncing.
 * *Press **`q`** to exit the application gracefully.*
 
+### 2. Integration API Server (REST & WebSockets)
+To run the local server allowing web browser frontends to integrate with the proctoring pipeline:
+```bash
+python src/server.py
+```
+* **REST Endpoints**:
+  * `POST /session/start`: Starts a new proctoring session.
+  * `POST /session/stop`: Stops a session and returns the final JSON session integrity report.
+  * `POST /session/frame`: Processes a single uploaded frame (for stateless HTTP setups).
+* **WebSocket Endpoint**:
+  * `WS /session/stream/{session_id}`: Receives raw binary image data (JPEG blobs) or base64 frame strings, runs real-time CPU inference, streams back active alert arrays, and returns the final report when stopped.
+
+### 3. Interactive Web Demo Client
+To test browser streaming, real-time alerts, and report dashboards:
+1. Ensure the API server is running (`python src/server.py`).
+2. Open the [frontend_demo.html](file:///d:/Projects/Ai%20agent/tests/fixtures/frontend_demo.html) file directly in any modern browser.
+3. Click **Start Proctoring** to authorize camera access and stream frames via WebSockets.
+4. Click **Stop & Generate Report** to terminate the session. The frontend client parses the report and classifies the result:
+   * **`CLEAN`** (Green): Trust score is high (>= 85).
+   * **`FLAGGED (NEEDS REVIEW)`** (Orange): Moderate infractions occurred (60 <= score < 85).
+   * **`FLAGGED (SUSPICIOUS)`** (Red): High-severity or sustained anomalies flagged.
+
+### 4. Importing as a Python Module (SDK)
+You can import the orchestrator into any Python client or backend project:
+```python
+from src.session_manager import ProctoringSession
+
+# Initialize session
+session = ProctoringSession(session_id="custom_id")
+session.start()
+
+# In your frame processing loop:
+active_alerts = session.process_frame(opencv_bgr_frame)
+print("Active Alerts:", active_alerts)
+
+# Terminate session and compile report
+report = session.stop()
+print("Session Score:", report["integrity_score"])
+print("Timeline:", report["timeline"])
+```
+
 ---
 
 ## 🧪 Testing & Validation
