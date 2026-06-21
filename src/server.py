@@ -1,8 +1,14 @@
 import os
+import sys
 import json
 import logging
 import base64
 from typing import Dict, List, Optional
+
+# Add parent directory to sys.path to allow running this script directly
+if __name__ == "__main__" and not __package__:
+    sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect, HTTPException, UploadFile, File, Query
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
