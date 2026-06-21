@@ -19,8 +19,8 @@ __pycache__/
 # Project logs
 logs/
 
-# Test fixtures / downloaded validation images
-tests/fixtures/
+tests/fixtures/validation_set/
+tests/fixtures/*.jpg
 
 # Model binaries (weights)
 models/*.pt
